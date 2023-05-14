@@ -2,9 +2,6 @@ import React, {Component} from "react";
 import { BsSearch } from "react-icons/bs";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-
-
-
 import css from './Searchbar.module.css';
 
 export class Searchbar extends Component {
@@ -49,8 +46,3 @@ handleSubmit = (e) => {
         );
     }
 }
-
-// handleSubmite = event => {
-//     event.preventDefault();
-//     if(this.state.photoName.trim(" ") === "") 
-// }

@@ -48,7 +48,7 @@ componentDidUpdate(prevProps, prevState) {
         const {data, isLoading} = this.state
         return(
             <>
-                {this.state.isShowModal && <Modal data={data} largePicture={this.state.largePicture}closeModal={this.closeModal} />}
+                {this.state.isShowModal && <Modal data={data} largePicture={this.state.largePicture} closeModal={this.closeModal} />}
                 {isLoading && <Loader />}
                 <ul className={css.ImageGallery}>
                     <ImageGalleryItem data={data} showModal={this.showModal}/>

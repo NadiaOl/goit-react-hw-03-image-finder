@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import css from './ImageGalleryItem.module.css';
 
@@ -13,4 +13,9 @@ export const ImageGalleryItem = ({data, showModal}) => {
         })
 
 )
+}
+
+ImageGalleryItem.propTypes = {
+    data: PropTypes.array,
+    showModal: PropTypes.func.isRequired,
 }
