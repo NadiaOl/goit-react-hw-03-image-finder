@@ -13,6 +13,7 @@ state={
     isLoading: false,
     page: 1,
     isShowModal: false,
+    largePicture: '',
 }
 
 componentDidUpdate(prevProps, prevState) {
@@ -35,8 +36,8 @@ componentDidUpdate(prevProps, prevState) {
         .catch((error) => console.log(error))
     };
 
-    showModal = () =>{
-        this.setState({isShowModal: true});
+    showModal = (event) =>{
+        this.setState({isShowModal: true, largePicture: event.target});
     }
 
     closeModal = () => {
@@ -47,7 +48,7 @@ componentDidUpdate(prevProps, prevState) {
         const {data, isLoading} = this.state
         return(
             <>
-                {this.state.isShowModal && <Modal data={data} closeModal={this.closeModal} />}
+                {this.state.isShowModal && <Modal data={data} largePicture={this.state.largePicture}closeModal={this.closeModal} />}
                 {isLoading && <Loader />}
                 <ul className={css.ImageGallery}>
                     <ImageGalleryItem data={data} showModal={this.showModal}/>
