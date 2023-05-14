@@ -1,51 +1,27 @@
 import React, {Component} from "react";
-import axios from 'axios';
-// import {Button} from './Button/Button';
-// import {ImageGallery} from './ImageGallery/ImageGallery';
-// import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
-// import {Loader} from './Loader/Loader';
-// import {Modal} from './Modal/Modal';
-// import {Searchbar} from './Searchbar/Searchbar';
-
-import css from '../components/Searchbar/Searchbar.module.css';
-
-// переменные
-const BASE_URL = 'https://pixabay.com/api/';
-// const KEY = '34756592-add6791e980caa28afb1f7410';
+import { ToastContainer } from 'react-toastify';
+import {ImageGallery} from './ImageGallery/ImageGallery';
+import {Searchbar} from './Searchbar/Searchbar';
+import css from '../components/Searchbar/Searchbar.module.css'
 
 
 
-//  получаем ответ от бекэнда
-// async function fetchPhoto(seekedPhoto, page) {
-//     const arraySearchPhoto = await axios.get(`${BASE_URL}/?key=${KEY}&q=${seekedPhoto}&image_type=photo&orientation=horizontal&safesearch=true&per_page=12&page=${page}`)
-//     return arraySearchPhoto
-// }
+export class App extends Component {
+  state = {
+    searchText: "",
+  }
 
-// export { fetchPhoto };
+  handleSearch = (searchText) => {
+    this.setState({searchText})
+  }
 
-export const App = () => {
-  return (
-    <div>
-<header class="searchbar">
-  <form class="form">
-    <button type="submit" class="button">
-      <span class="button-label">Search</span>
-    </button>
-
-    <input
-      class="input"
-      type="text"
-      autocomplete="off"
-      autofocus
-      placeholder="Search images and photos"
-    />
-  </form>
-</header>
-<div class="overlay">
-  <div class="modal">
-    <img src="" alt="" />
-  </div>
-</div>
-    </div>
-  );
+  render(){
+    return (
+      <div className={css.App}>
+        <Searchbar handleSearch={this.handleSearch}/>
+        <ToastContainer/>
+        <ImageGallery searchText={this.state.searchText}/>
+      </div> 
+    );
+  }
 };
