@@ -36,8 +36,8 @@ componentDidUpdate(prevProps, prevState) {
         .catch((error) => console.log(error))
     };
 
-    showModal = (event) =>{
-        this.setState({isShowModal: true, largePicture: event.target});
+    showModal = (largeImageURL) =>{
+        this.setState({isShowModal: true, largePicture: largeImageURL});
     }
 
     closeModal = () => {

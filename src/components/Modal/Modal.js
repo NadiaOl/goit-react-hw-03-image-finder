@@ -7,7 +7,7 @@ export const Modal = ({ closeModal, largePicture})=> {
     return (
         <div className={css.Overlay} onClick={closeModal}>
             <div className={css.Modal}>
-                <img src={largePicture} alt="something" />
+                <img src={largePicture} alt="some" />
             </div>
         </div>
     )
