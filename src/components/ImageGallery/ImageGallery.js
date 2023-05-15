@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { getPicture } from '../API/API';
+import { getPicture } from '../../API/API';
 import { Loader } from '../Loader/Loader';
 import { ImageGalleryItem } from "../ImageGalleryItem/ImageGalleryItem";
 import {Button} from '../Button/Button';
@@ -17,23 +17,32 @@ state={
 }
 
 componentDidUpdate(prevProps, prevState) {
-    if(prevProps.searchText !== this.props.searchText){
-        this.setState({isLoading: true, page: 1})
-        getPicture(this.props.searchText, this.state.page)
+    const {page} =this.state;
+    const searchText = this.props.searchText;
+    
+    if(prevProps.searchText !== searchText){
+        this.setState({isLoading: true, data: null})
+        getPicture(searchText, page)
         .then(response => response.json())
         .then((data) => this.setState({data: data.hits}))
         .catch((error) => console.log(error))
-        .finally(() => {this.setState({isLoading: false, page: this.state.page+1})
+        .finally(() => {this.setState({isLoading: false, page: 1})
     })
     }
+    if(prevState.page !== page){
+        this.setState({isLoading: true})
+        getPicture(searchText, page)
+        .then(response => response.json())
+        .then((data) => this.setState({data: [ ...prevState.data, ...data.hits]}))
+        .catch((error) => console.log(error))
+        .finally(() => {this.setState({isLoading: false})
+    })
+    }
+
 }
 
     hendlerButtonClick = (e) => {
-        this.setState({page: this.state.page+1})
-        getPicture(this.props.searchText, this.state.page)
-        .then(response => response.json())
-        .then((data, page) => this.setState({data: data.hits}))
-        .catch((error) => console.log(error))
+        this.setState({page: this.state.page + 1})
     };
 
     showModal = (largeImageURL) =>{
@@ -45,10 +54,10 @@ componentDidUpdate(prevProps, prevState) {
     }
 
     render() {
-        const {data, isLoading} = this.state
+        const {data, isLoading, largePicture} = this.state
         return(
             <>
-                {this.state.isShowModal && <Modal data={data} largePicture={this.state.largePicture} closeModal={this.closeModal} />}
+                {this.state.isShowModal && <Modal data={data} largePicture={largePicture} closeModal={this.closeModal} />}
                 {isLoading && <Loader />}
                 <ul className={css.ImageGallery}>
                     <ImageGalleryItem data={data} showModal={this.showModal}/>

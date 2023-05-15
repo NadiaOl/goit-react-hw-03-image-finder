@@ -5,6 +5,7 @@ import css from './ImageGalleryItem.module.css';
 
 export const ImageGalleryItem = ({data, showModal}) => {
     return (
+        
         data &&
         data.map(({id, webformatURL, largeImageURL}) => {
             return <li className={css.ImageGalleryItem} key={id} onClick={() => showModal(largeImageURL)} >
@@ -17,5 +18,8 @@ export const ImageGalleryItem = ({data, showModal}) => {
 
 ImageGalleryItem.propTypes = {
     data: PropTypes.array,
+    id: PropTypes.number,
+    webformatURL: PropTypes.string,
+    largeImageURL: PropTypes.string,
     showModal: PropTypes.func.isRequired,
 }

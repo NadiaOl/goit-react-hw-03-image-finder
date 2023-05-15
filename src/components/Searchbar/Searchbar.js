@@ -3,6 +3,8 @@ import { BsSearch } from "react-icons/bs";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import css from './Searchbar.module.css';
+import PropTypes from "prop-types";
+
 
 export class Searchbar extends Component {
     state = {
@@ -18,7 +20,7 @@ handleSubmit = (e) => {
         toast.warn("Enter a search term, please!");
         return
     }
-    this.setState({value: ""})
+
     this.props.handleSearch(this.state.value)
 }
 
@@ -45,4 +47,8 @@ handleSubmit = (e) => {
             </div>
         );
     }
+}
+
+Searchbar.propTypes = {
+    handleSearch: PropTypes.func.isRequired,
 }
