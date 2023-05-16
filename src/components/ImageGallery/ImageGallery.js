@@ -34,7 +34,8 @@ componentDidUpdate(prevProps, prevState) {
     })
     }
 
-    if(prevState.page !== page){
+    if(prevState.page !== page && prevState.data !== null){
+        console.log(prevState.data)
         this.setState({isLoading: true})
         getPicture(searchText, page)
         .then(response => response.json())
