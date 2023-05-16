@@ -22,11 +22,13 @@ componentDidUpdate(prevProps, prevState) {
     
     if(prevProps.searchText !== searchText){
         this.setState({isLoading: true, data: null})
-        getPicture(searchText, page)
+        getPicture(searchText, 1)
         .then(response => response.json())
         .then((data) => this.setState({data: data.hits}))
         .catch((error) => console.log(error))
-        .finally(() => {this.setState({isLoading: false, page: 1})
+            .finally(() => {
+                this.setState({ isLoading: false, page: 1})
+
     })
     }
     if(prevState.page !== page){
@@ -35,14 +37,15 @@ componentDidUpdate(prevProps, prevState) {
         .then(response => response.json())
         .then((data) => this.setState({data: [ ...prevState.data, ...data.hits]}))
         .catch((error) => console.log(error))
-        .finally(() => {this.setState({isLoading: false})
+            .finally(() => {
+                this.setState({ isLoading: false })
     })
     }
-
 }
 
     hendlerButtonClick = (e) => {
-        this.setState({page: this.state.page + 1})
+        this.setState({ page: this.state.page + 1 })
+
     };
 
     showModal = (largeImageURL) =>{
