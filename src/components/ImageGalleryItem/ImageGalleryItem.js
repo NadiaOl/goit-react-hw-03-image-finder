@@ -19,8 +19,8 @@ export const ImageGalleryItem = ({data, showModal}) => {
 ImageGalleryItem.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
-    id: PropTypes.number,
-    webformatURL: PropTypes.string,
-    largeImageURL: PropTypes.string,})),
+    id: PropTypes.number.isRequired,
+    webformatURL: PropTypes.string.isRequired,
+    largeImageURL: PropTypes.string.isRequired,})),
     showModal: PropTypes.func.isRequired,
 }

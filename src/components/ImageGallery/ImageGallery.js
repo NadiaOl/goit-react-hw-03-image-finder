@@ -19,10 +19,11 @@ state={
 componentDidUpdate(prevProps, prevState) {
     const {page} =this.state;
     const searchText = this.props.searchText;
+    const prevSearchText= prevProps.searchText; 
 
 
     
-    if(prevProps.searchText !== searchText){
+    if(prevSearchText !== searchText){
         this.setState({isLoading: true, data: null})
         getPicture(searchText, 1)
         .then(response => response.json())
