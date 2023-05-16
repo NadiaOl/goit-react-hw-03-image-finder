@@ -19,18 +19,20 @@ state={
 componentDidUpdate(prevProps, prevState) {
     const {page} =this.state;
     const searchText = this.props.searchText;
+
+
     
     if(prevProps.searchText !== searchText){
         this.setState({isLoading: true, data: null})
         getPicture(searchText, 1)
         .then(response => response.json())
-        .then((data) => this.setState({data: data.hits}))
+        .then((data) => this.setState({data: data.hits, page: 1}))
         .catch((error) => console.log(error))
             .finally(() => {
-                this.setState({ isLoading: false, page: 1})
-
+                this.setState({ isLoading: false})
     })
     }
+
     if(prevState.page !== page){
         this.setState({isLoading: true})
         getPicture(searchText, page)
@@ -45,7 +47,6 @@ componentDidUpdate(prevProps, prevState) {
 
     hendlerButtonClick = (e) => {
         this.setState({ page: this.state.page + 1 })
-
     };
 
     showModal = (largeImageURL) =>{
